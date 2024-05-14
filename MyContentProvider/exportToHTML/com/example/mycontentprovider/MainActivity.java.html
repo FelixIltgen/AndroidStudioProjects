@@ -1,0 +1,69 @@
+<html>
+<head>
+<title>MainActivity.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #7a7e85;}
+.s4 { color: #6aab73;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+MainActivity.java</font>
+</center></td></tr></table>
+<pre><span class="s0">public void </span><span class="s1">onClickUpdateStudents</span><span class="s2">(</span><span class="s1">View view</span><span class="s2">){</span>
+        <span class="s3">// Get name and grade from the user to update</span>
+        <span class="s1">ContentValues values </span><span class="s2">= </span><span class="s0">new </span><span class="s1">ContentValues</span><span class="s2">();</span>
+        <span class="s1">values</span><span class="s2">.</span><span class="s1">put</span><span class="s2">(</span><span class="s1">StudentProvider</span><span class="s2">.</span><span class="s1">NAME</span><span class="s2">, ((</span><span class="s1">EditText</span><span class="s2">)</span><span class="s1">findViewById</span><span class="s2">(</span><span class="s1">R</span><span class="s2">.</span><span class="s1">id</span><span class="s2">.</span><span class="s1">editText_name</span><span class="s2">)).</span><span class="s1">getText</span><span class="s2">().</span><span class="s1">toString</span><span class="s2">());</span>
+        <span class="s1">values</span><span class="s2">.</span><span class="s1">put</span><span class="s2">(</span><span class="s1">StudentProvider</span><span class="s2">.</span><span class="s1">GRADE</span><span class="s2">,((</span><span class="s1">EditText</span><span class="s2">)</span><span class="s1">findViewById</span><span class="s2">(</span><span class="s1">R</span><span class="s2">.</span><span class="s1">id</span><span class="s2">.</span><span class="s1">editText_grade</span><span class="s2">)).</span><span class="s1">getText</span><span class="s2">().</span><span class="s1">toString</span><span class="s2">());</span>
+        <span class="s1">String name </span><span class="s2">= </span><span class="s1">values</span><span class="s2">.</span><span class="s1">get</span><span class="s2">(</span><span class="s1">StudentProvider</span><span class="s2">.</span><span class="s1">NAME</span><span class="s2">).</span><span class="s1">toString</span><span class="s2">();</span>
+
+        <span class="s3">//get students from the db</span>
+        <span class="s1">String URL </span><span class="s2">= </span><span class="s4">&quot;content://com.example.mycontentprovider.StudentProvider&quot;</span><span class="s2">;</span>
+        <span class="s1">Uri students </span><span class="s2">= </span><span class="s1">Uri</span><span class="s2">.</span><span class="s1">parse</span><span class="s2">(</span><span class="s1">URL</span><span class="s2">);</span>
+        <span class="s1">Cursor c </span><span class="s2">= </span><span class="s1">getContentResolver</span><span class="s2">().</span><span class="s1">query</span><span class="s2">(</span><span class="s1">students</span><span class="s2">, </span><span class="s0">null</span><span class="s2">, </span><span class="s0">null</span><span class="s2">, </span><span class="s0">null</span><span class="s2">, </span><span class="s1">StudentProvider</span><span class="s2">.</span><span class="s1">_ID</span><span class="s2">);</span>
+        
+        <span class="s0">while </span><span class="s2">(</span><span class="s1">c</span><span class="s2">.</span><span class="s1">moveToNext</span><span class="s2">()){</span>
+            <span class="s3">//Check input name and name in db</span>
+            <span class="s0">if </span><span class="s2">(</span><span class="s1">name</span><span class="s2">.</span><span class="s1">equals</span><span class="s2">(</span><span class="s1">c</span><span class="s2">.</span><span class="s1">getString</span><span class="s2">(</span><span class="s1">c</span><span class="s2">.</span><span class="s1">getColumnIndex</span><span class="s2">(</span><span class="s1">StudentProvider</span><span class="s2">.</span><span class="s1">NAME</span><span class="s2">)))){</span>
+                <span class="s1">Log</span><span class="s2">.</span><span class="s1">d</span><span class="s2">(</span><span class="s4">&quot;Log&quot;</span><span class="s2">,</span><span class="s4">&quot;Name ist vorhanden&quot;</span><span class="s2">);</span>
+                <span class="s3">//Update the grade </span>
+                <span class="s1">getContentResolver</span><span class="s2">().</span><span class="s1">update</span><span class="s2">(</span><span class="s1">StudentProvider</span><span class="s2">.</span><span class="s1">CONTENT_URI</span><span class="s2">,</span><span class="s1">values</span><span class="s2">,</span><span class="s0">null</span><span class="s2">,</span><span class="s0">null</span><span class="s2">);</span>
+                <span class="s0">break</span><span class="s2">;</span>
+            <span class="s2">} </span><span class="s0">else </span><span class="s2">{</span>
+                <span class="s1">Log</span><span class="s2">.</span><span class="s1">d</span><span class="s2">(</span><span class="s4">&quot;Log&quot;</span><span class="s2">,</span><span class="s4">&quot;Name ist nicht vorhanden&quot;</span><span class="s2">);</span>
+            <span class="s2">}</span>
+        <span class="s2">}</span>
+    <span class="s2">}</span>
+    <span class="s0">public void </span><span class="s1">onClickDeleteStudents</span><span class="s2">(</span><span class="s1">View view</span><span class="s2">){</span>
+        <span class="s3">// Get name and grade from the user to delete</span>
+        <span class="s1">ContentValues values </span><span class="s2">= </span><span class="s0">new </span><span class="s1">ContentValues</span><span class="s2">();</span>
+        <span class="s1">values</span><span class="s2">.</span><span class="s1">put</span><span class="s2">(</span><span class="s1">StudentProvider</span><span class="s2">.</span><span class="s1">NAME</span><span class="s2">, ((</span><span class="s1">EditText</span><span class="s2">)</span><span class="s1">findViewById</span><span class="s2">(</span><span class="s1">R</span><span class="s2">.</span><span class="s1">id</span><span class="s2">.</span><span class="s1">editText_name</span><span class="s2">)).</span><span class="s1">getText</span><span class="s2">().</span><span class="s1">toString</span><span class="s2">());</span>
+        <span class="s1">String name </span><span class="s2">= </span><span class="s1">values</span><span class="s2">.</span><span class="s1">get</span><span class="s2">(</span><span class="s1">StudentProvider</span><span class="s2">.</span><span class="s1">NAME</span><span class="s2">).</span><span class="s1">toString</span><span class="s2">();</span>
+
+        <span class="s3">//get students from db</span>
+        <span class="s1">String URL </span><span class="s2">= </span><span class="s4">&quot;content://com.example.mycontentprovider.StudentProvider&quot;</span><span class="s2">;</span>
+        <span class="s1">Uri students </span><span class="s2">= </span><span class="s1">Uri</span><span class="s2">.</span><span class="s1">parse</span><span class="s2">(</span><span class="s1">URL</span><span class="s2">);</span>
+        <span class="s1">Cursor c </span><span class="s2">= </span><span class="s1">getContentResolver</span><span class="s2">().</span><span class="s1">query</span><span class="s2">(</span><span class="s1">students</span><span class="s2">, </span><span class="s0">null</span><span class="s2">, </span><span class="s0">null</span><span class="s2">, </span><span class="s0">null</span><span class="s2">, </span><span class="s1">StudentProvider</span><span class="s2">.</span><span class="s1">_ID</span><span class="s2">);</span>
+
+        <span class="s0">while </span><span class="s2">(</span><span class="s1">c</span><span class="s2">.</span><span class="s1">moveToNext</span><span class="s2">()){</span>
+            <span class="s3">//Check input name and name in db</span>
+            <span class="s0">if </span><span class="s2">(</span><span class="s1">name</span><span class="s2">.</span><span class="s1">equals</span><span class="s2">(</span><span class="s1">c</span><span class="s2">.</span><span class="s1">getString</span><span class="s2">(</span><span class="s1">c</span><span class="s2">.</span><span class="s1">getColumnIndex</span><span class="s2">(</span><span class="s1">StudentProvider</span><span class="s2">.</span><span class="s1">NAME</span><span class="s2">)))){</span>
+                <span class="s1">Log</span><span class="s2">.</span><span class="s1">d</span><span class="s2">(</span><span class="s4">&quot;Log&quot;</span><span class="s2">,</span><span class="s4">&quot;Name ist vorhanden&quot;</span><span class="s2">);</span>
+
+                <span class="s3">//Delete grade</span>
+                <span class="s0">int </span><span class="s1">x </span><span class="s2">= </span><span class="s1">getContentResolver</span><span class="s2">().</span><span class="s1">delete</span><span class="s2">(</span><span class="s1">StudentProvider</span><span class="s2">.</span><span class="s1">CONTENT_URI</span><span class="s2">,</span><span class="s1">name</span><span class="s2">, </span><span class="s0">null</span><span class="s2">);</span>
+                <span class="s0">break</span><span class="s2">;</span>
+            <span class="s2">} </span><span class="s0">else </span><span class="s2">{</span>
+                <span class="s1">Log</span><span class="s2">.</span><span class="s1">d</span><span class="s2">(</span><span class="s4">&quot;Log&quot;</span><span class="s2">,</span><span class="s4">&quot;Name ist nicht vorhanden&quot;</span><span class="s2">);</span>
+            <span class="s2">}</span>
+        <span class="s2">}</span>
+
+    <span class="s2">}</span></pre>
+</body>
+</html>

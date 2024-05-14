@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">MyUIControls</string>
+    <string-array name="arrays_films">
+        <item>Episode IV – A New Hope</item>
+        <item>Episode V – The Empire Strikes Back</item>
+        <item>Episode VI – Return of the Jedi</item>
+        <item>Episode I – The Phantom Menace</item>
+        <item>Episode II – Attack of the Clones</item>
+        <item>Episode III – Revenge of the Sith</item>
+        <item>Episode VII – The Force Awakens</item>
+        <item>Episode VIII – The Last Jedi</item>
+        <item>Episode IX – The Rise of Skywalker</item>
+    </string-array>
+</resources>

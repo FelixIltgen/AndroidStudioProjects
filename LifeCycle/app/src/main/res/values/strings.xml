@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">LifeCycle</string>
+    <string name="secondString">This is my second string</string>
+</resources>
