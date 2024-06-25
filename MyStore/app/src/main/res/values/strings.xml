@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">MyStore</string>
+    <string name="book_store">Book Store</string>
+    <string name="b_cherei">Bücherei</string>
+    <string name="updaten_und_l_schen">Updaten und Löschen</string>
+    <string name="titel">Titel</string>
+    <string name="book_author">Book Author</string>
+    <string name="ispn">ISPN</string>
+    <string name="rating">Rating</string>
+    <string name="update">Update</string>
+    <string name="delete">Delete</string>
+</resources>
