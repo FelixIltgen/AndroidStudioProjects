@@ -27,7 +27,6 @@ public class MainActivity extends AppCompatActivity  {
     NotificationManager notificationManager;
     RadioButton radioButtonFirst;
     RadioButton radioButtonSecond;
-    RadioButton radioButtonThird;
     RadioGroup radioGroup;
     EditText editText;
     Button btnNotification;
@@ -42,7 +41,6 @@ public class MainActivity extends AppCompatActivity  {
         radioGroup = findViewById(R.id.radioGroup);
         radioButtonFirst = findViewById(R.id.radioButton1);
         radioButtonSecond = findViewById(R.id.radioButton2);
-        radioButtonThird = findViewById(R.id.radioButton3);
 
         notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
@@ -52,7 +50,6 @@ public class MainActivity extends AppCompatActivity  {
             List<NotificationChannelGroup> list = new ArrayList<>();
             list.add(new NotificationChannelGroup(radioButtonFirst.getText().toString(), radioButtonFirst.getText()));
             list.add(new NotificationChannelGroup(radioButtonSecond.getText().toString(), radioButtonSecond.getText()));
-            list.add(new NotificationChannelGroup(radioButtonThird.getText().toString(), radioButtonThird.getText()));
             notificationManager.createNotificationChannelGroups(list);
 
             // creating notification channels
@@ -68,17 +65,10 @@ public class MainActivity extends AppCompatActivity  {
             notificationChannel2.setGroup(radioButtonSecond.getText().toString());
             notificationChannel2.setVibrationPattern(new long[]{100, 200, 300, 400, 500, 400, 300, 200, 400});
 
-            NotificationChannel notificationChannel3 = new NotificationChannel("My_Notification_" + radioButtonThird.getText().toString(), "Notification channel 3", NotificationManager.IMPORTANCE_HIGH );
-            notificationChannel3.enableLights(true);
-            notificationChannel3.enableVibration(true);
-            notificationChannel3.setGroup(radioButtonThird.getText().toString());
-            notificationChannel3.setVibrationPattern(new long[]{100, 200, 300, 400, 500, 400, 300, 200, 400});
-
 
             if (notificationManager != null) {
                 notificationManager.createNotificationChannel(notificationChannel);
                 notificationManager.createNotificationChannel(notificationChannel2);
-                notificationManager.createNotificationChannel(notificationChannel3);
             }
         }
 
